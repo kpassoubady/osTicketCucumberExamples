@@ -1,4 +1,4 @@
-@homepage, @webdriver
+@home-page @web-driver
 Feature: Check the opening of a new ticket in osticket application
   I want to open a new ticket using osticket application
   I want to check whether the ticket successfully submitted
@@ -7,6 +7,7 @@ Feature: Check the opening of a new ticket in osticket application
     When I'm on the home page of "http://osticket.kavinschool.com/"
     Then I verify that the title is "KavinSchool:: Support Ticket System"
 
+  @form-check
   Scenario Outline: Verify new ticket creation in osticket application
     When I clicked on the Open New Ticket button
     Then I will wait for "Please fill in the form below to open a new ticket." text to shows

@@ -8,16 +8,26 @@ import static cucumber.api.SnippetType.CAMELCASE;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/open_new_ticket.feature",
+        features = "src/test/resources/features",
+
         glue = {"classpath:com.kavinschool.osticket.steps",
                 "classpath:com.kavinschool.osticket.hooks"},
-        plugin = {"pretty","html:target/selenium-reports","json:target/cucumber.json"},
+
+        plugin = {
+                "pretty",
+                "html:target/cucumber-reports",
+                "json:target/cucumber.json",
+                "junit:target/cucumber-reports/cucumber.xml",
+                "rerun:target/cucumber-reports/rerun.txt"
+        },
+
         snippets= CAMELCASE,
         strict = true,
         //dryRun = true,
         monochrome = true,
-      //  tags = {"@homepage"},
-        name = {"osticket"}
+        tags = {"@home-page"}
+        //name = {"osticket"}
 )
 public class RunFeaturesTest {
+
 }

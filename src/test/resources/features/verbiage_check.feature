@@ -1,9 +1,10 @@
-@homepage, @webdriver
+@home-page @web-driver
 Feature: Check the title and verify all the verbiages
   In order for landing in to the right page
   I want to check the title of osticket application
 
-  Scenario: Verify the title and veribiages of osticket application home page
+  @verbiages-check
+  Scenario: Verify the title and verbiages of osticket application home page
     When I'm on the home page of "http://osticket.kavinschool.com/"
     Then I verify that the title is "KavinSchool:: Support Ticket System"
     And I verify that the header shows as "Welcome to the support center"
