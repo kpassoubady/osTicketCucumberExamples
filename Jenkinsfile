@@ -20,9 +20,10 @@ node('win') {
         withEnv([
                 "MVN_HOME=$mvnHome",
                 "JAVA_HOME=$javaHome",
+                "CUCUMBER_TAGS=title-check",
                 "PATH=$javaHome\bin:$PATH"
         ]) {
-            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options=\"--tags ${CUCUMBER_TAGS}/)
+            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options=\"--tags ${CUCUMBER_TAGS}\" /)
         }
     }
 
