@@ -138,7 +138,7 @@ public class DriverFactory {
      * @param scenario the scenario
      * @throws Exception the exception
      */
-    @Before("@webdriver")
+    @Before("@web-driver")
     public void setUp(Scenario scenario) throws Exception {
         System.out.println("scenario:" + scenario.getName());
         this.scenario = scenario;
@@ -206,7 +206,7 @@ public class DriverFactory {
      *
      * @throws Exception the exception
      */
-    @After("@webdriver")
+    @After("@web-driver")
     public void tearDown() throws Exception {
 
 //        try {
