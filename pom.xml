@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>CucumberExamples</groupId>
     <artifactId>CucumberExamples</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -21,7 +20,62 @@
         <maven-surefire-plugin-version>2.20</maven-surefire-plugin-version>
         <junit-version>4.12</junit-version>
         <cucumber-picocontainer-version>1.2.5</cucumber-picocontainer-version>
+        <doclint>none</doclint>
+        <aspectj.version>1.9.1</aspectj.version>
+        <allure.version>2.9.0</allure.version>
     </properties>
+    <profiles>
+        <profile>
+            <id>cucumber-test</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <version>${maven-surefire-plugin}</version>
+                            <configuration>
+                                <!-- <skipTests>true</skipTests> -->
+                                <includes>
+                                    <include>**/RunFeaturesTest.java</include>
+                                </includes>
+                                <!-- <parallel>methods</parallel> -->
+                                <!-- <threadCount>3</threadCount> -->
+                                <testFailureIgnore>true</testFailureIgnore>
+<!--                                <forkCount>0</forkCount>-->
+                                <argLine>-Xmx2048m</argLine>
+                                <argLine>-DfailIfNoTests=false</argLine>
+                                <argLine>
+                                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                                </argLine>
+                                <systemPropertyVariables>
+                                    <browserType>chrome</browserType>
+                                </systemPropertyVariables>
+                            </configuration>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.aspectj</groupId>
+                                    <artifactId>aspectjweaver</artifactId>
+                                    <version>${aspectj.version}</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
+                        <plugin>
+                            <groupId>io.qameta.allure</groupId>
+                            <artifactId>allure-maven</artifactId>
+                            <version>2.9</version>
+                            <configuration>
+                                <reportVersion>${allure.version}</reportVersion>
+                                <allureDownloadUrl>
+                                    https://github.com/allure-framework/allure2/releases/download/${allure.version}/allure-${allure.version}.zip
+                                </allureDownloadUrl>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <plugin>
@@ -31,6 +85,10 @@
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <testSource>${maven.compiler.source}</testSource>
+                    <testTarget>${maven.compiler.target}</testTarget>
+                    <showDeprecation>false</showDeprecation>
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
                 </configuration>
             </plugin>
             <plugin>
@@ -74,15 +132,15 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber-picocontainer-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

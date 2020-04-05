@@ -5,7 +5,7 @@ node('win') {
 
     stage('Gather Test Input') {
         // Set Parameters
-        
+
     }
 
     stage('Git Checkout') {
