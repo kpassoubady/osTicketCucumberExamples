@@ -5,17 +5,7 @@ node('win') {
 
     stage('Gather Test Input') {
         // Set Parameters
-        properties([[$class: 'JiraProjectProperty'],
-        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '30', numToKeepStr: '20')),
-        [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
-        [$class: 'JobRestrictionProperty'],
-        parameters([[$class: 'ExtensibleChoiceParameterDefinition', choiceListProvider: [$class: 'TextareaChoiceListProvider', addEditedValue: false, choiceListText: '''http://osticket.kavinschool.com/
-https://plusresources.org/osticket/
-''', defaultChoice: 'http://osticket.kavinschool.com/'], description: '<span style="color: blue;">Provide the Home URL of osTicket </span>', editable: false, name: 'HOME_URL'],
-        string(defaultValue: '@P2-NIPS_TEST', description: '<span style="color: blue;">Provide comma separated value of cucumber tags (make sure to add @ symbol in front of tags)</span>', name: 'CUCUMBER_TAGS', trim: false),
-        string(defaultValue: 'master', description: '<span style="color: blue;">Provide a valid git branch</span>', name: 'BRANCH', trim: false),  ]),
-         [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 2, maxConcurrentTotal: 2, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'],
-         pipelineTriggers([cron('0 23 * * *')])])
+        
     }
 
     stage('Git Checkout') {
