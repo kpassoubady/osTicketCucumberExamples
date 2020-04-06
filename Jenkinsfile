@@ -17,14 +17,14 @@ https://plusresources.org/osticket/
                         string(defaultValue: 'chrome', description: 'Please enter your browser type', name: 'browserType', trim: true)
                 ]),
                 [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 2, maxConcurrentTotal: 2, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'],
-                pipelineTriggers([cron('0 23 * * *')])
+                pipelineTriggers([cron('15 20 * * 1-5')])
         ])
 
     }
 
     stage('Git Checkout') {
         // Checkout code from repository
-        git credentialsId: 'kpassoubady_git_ssh', url: 'git@github.com:kpassoubady/osTicketCucumberExamples.git'
+        git branch: '${BRANCH}', credentialsId: 'kpassoubady_git_ssh', url: 'git@github.com:kpassoubady/osTicketCucumberExamples.git'
         mvnHome = tool 'MVN-WIN'
         javaHome = tool 'JDK11-WIN'
     }
@@ -34,7 +34,7 @@ https://plusresources.org/osticket/
         withEnv([
                 "MVN_HOME=$mvnHome",
                 "JAVA_HOME=$javaHome",
-                "CUCUMBER_TAGS=@title-check",
+                //"CUCUMBER_TAGS=@title-check",
                 "PATH=$javaHome\bin:$PATH"
         ]) {
             bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)

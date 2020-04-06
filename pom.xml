@@ -49,7 +49,7 @@
                                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                                 </argLine>
                                 <systemPropertyVariables>
-                                    <browserType>chrome</browserType>
+                                    <browserType>${browserType}</browserType>
                                 </systemPropertyVariables>
                             </configuration>
                             <dependencies>
