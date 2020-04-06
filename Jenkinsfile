@@ -41,6 +41,7 @@ https://plusresources.org/osticket/
                 "PATH=$javaHome\bin:$allureHome\bin:$PATH"
         ]) {
             bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)
+            allure jdk: '${javaHome}', report: 'target/allure-report', results: [[path: 'target/allure-results']]
         }
     }
 
@@ -49,10 +50,10 @@ https://plusresources.org/osticket/
         parallel junit: {
             junit '**/target/surefire-reports/TEST-*.xml'
         }, allure: {
-            allure jdk: '', report: 'target/allure-report', results: [[path: 'target/allure-results']]
+            // Allure generation
+            allure includeProperties: false, jdk: '', report: 'target/allure-report', results: [[path: 'target/allure-results']]
         }
         archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar', fingerprint: true, onlyIfSuccessful: true
-        allure includeProperties: false, jdk: '', report: 'target/allure-report', results: [[path: 'target/allure-results']]
         cucumber expandAllSteps: true, failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileExcludePattern: 'classes/*.json', fileIncludePattern: '**/cucumber.json', hideEmptyHooks: true, mergeFeaturesById: true, skipEmptyJSONFiles: true, jsonReportDirectory: 'target', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/cucumber-reports', reportFiles: 'index.html', reportName: 'Screenshot Simple Report', reportTitles: ''])
     }
