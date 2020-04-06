@@ -40,8 +40,8 @@ https://plusresources.org/osticket/
                 //"CUCUMBER_TAGS=@title-check",
                 "PATH=$javaHome\bin:$allureHome\bin:$PATH"
         ]) {
-            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)
-            allure jdk: 'JDK11-WIN', report: 'target/allure-report', results: [[path: 'target/allure-results']]
+            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)
+            allure jdk: 'JDK11-WIN',reportBuildPolicy: 'ALWAYS', report: 'target/allure-report', results: [[path: 'target/allure-results']]
             //allure includeProperties: false, jdk: 'JDK11-WIN', report: 'target/allure-report', results: [[path: 'target/allure-results']]
         }
     }
