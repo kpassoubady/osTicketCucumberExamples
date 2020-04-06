@@ -41,8 +41,7 @@ https://plusresources.org/osticket/
                 "PATH=$javaHome\bin:$allureHome\bin:$PATH"
         ]) {
             bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)
-            allure jdk: '${javaHome}', report: 'target/allure-report', results: [[path: 'target/allure-results']]
-        }
+            allure jdk: 'JDK11-WIN', report: 'target/allure-report', results: [[path: 'target/allure-results']]        }
     }
 
     stage('Publish Test Results') {
