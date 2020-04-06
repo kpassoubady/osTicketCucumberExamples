@@ -12,8 +12,9 @@ node('win') {
                         [$class: 'ExtensibleChoiceParameterDefinition', choiceListProvider: [$class: 'TextareaChoiceListProvider', addEditedValue: false, choiceListText: '''http://osticket.kavinschool.com/
 https://plusresources.org/osticket/
 ''', defaultChoice: 'http://osticket.kavinschool.com/'], description: '<span style="color: blue;">Provide the Home URL of osTicket </span>', editable: false, name: 'HOME_URL'],
-                        string(defaultValue: '@title-check', description: 'Please provide cucumber tags (comma separated values)', name: 'CUCUMBER_TAGS', trim: false),
-                        string(defaultValue: 'master', description: '<span style="color: blue;">Provide a valid git branch</span>', name: 'BRANCH', trim: false)
+                        string(defaultValue: '@title-check', description: 'Please provide cucumber tags (comma separated values)', name: 'CUCUMBER_TAGS', trim: true),
+                        string(defaultValue: 'master', description: '<span style="color: blue;">Provide a valid git branch</span>', name: 'BRANCH', trim: true),
+                        string(defaultValue: 'chrome', description: 'Please enter your browser type', name: 'browserType', trim: true)
                 ]),
                 [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 2, maxConcurrentTotal: 2, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'],
                 pipelineTriggers([cron('0 23 * * *')])
