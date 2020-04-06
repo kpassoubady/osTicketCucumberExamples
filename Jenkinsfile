@@ -5,6 +5,20 @@ node('win') {
 
     stage('Gather Test Input') {
         // Set Parameters
+        properties([
+                buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '3')),
+                [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
+                [$class: 'JobRestrictionProperty'],
+                parameters([
+                        [$class: 'ExtensibleChoiceParameterDefinition', choiceListProvider: [$class: 'TextareaChoiceListProvider', addEditedValue: false, choiceListText: '''http://osticket.kavinschool.com/
+https://plusresources.org/osticket/
+''', defaultChoice: 'http://osticket.kavinschool.com/'], description: '<span style="color: blue;">Provide the Home URL of osTicket </span>', editable: false, name: 'HOME_URL'],
+                        string(defaultValue: '@title-check', description: 'Please provide cucumber tags (comma separated values)', name: 'CUCUMBER_TAGS', trim: false),
+                        string(defaultValue: 'master', description: '<span style="color: blue;">Provide a valid git branch</span>', name: 'BRANCH', trim: false)
+                ]),
+                [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 2, maxConcurrentTotal: 2, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project'],
+                pipelineTriggers([cron('0 23 * * *')])
+        ])
 
     }
 
