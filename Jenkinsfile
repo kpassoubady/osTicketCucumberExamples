@@ -27,6 +27,9 @@ https://plusresources.org/osticket/
         git branch: '${BRANCH}', credentialsId: 'kpassoubady_git_ssh', url: 'git@github.com:kpassoubady/osTicketCucumberExamples.git'
         mvnHome = tool 'MVN-WIN'
         javaHome = tool 'JDK11-WIN'
+        allureHome = tool 'ALLURE_WIN'
+        env.JAVA_HOME = "${javaHome}"
+        env.ALLURE_HOME = "${allureHome}"
     }
 
     stage('Build & Run Tests') {
@@ -35,7 +38,7 @@ https://plusresources.org/osticket/
                 "MVN_HOME=$mvnHome",
                 "JAVA_HOME=$javaHome",
                 //"CUCUMBER_TAGS=@title-check",
-                "PATH=$javaHome\bin:$PATH"
+                "PATH=$javaHome\bin:$allureHome\bin:$PATH"
         ]) {
             bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)
         }
