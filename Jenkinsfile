@@ -41,7 +41,9 @@ https://plusresources.org/osticket/
                 "PATH=$javaHome\bin:$allureHome\bin:$PATH"
         ]) {
             bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean test -Dcucumber.options="--tags ${CUCUMBER_TAGS}" /)
-            allure jdk: 'JDK11-WIN', report: 'target/allure-report', results: [[path: 'target/allure-results']]        }
+            allure jdk: 'JDK11-WIN', report: 'target/allure-report', results: [[path: 'target/allure-results']]
+            //allure includeProperties: false, jdk: 'JDK11-WIN', report: 'target/allure-report', results: [[path: 'target/allure-results']]
+        }
     }
 
     stage('Publish Test Results') {
@@ -50,7 +52,6 @@ https://plusresources.org/osticket/
             junit '**/target/surefire-reports/TEST-*.xml'
         }, allure: {
             // Allure generation
-            allure includeProperties: false, jdk: '', report: 'target/allure-report', results: [[path: 'target/allure-results']]
         }
         archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar', fingerprint: true, onlyIfSuccessful: true
         cucumber expandAllSteps: true, failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileExcludePattern: 'classes/*.json', fileIncludePattern: '**/cucumber.json', hideEmptyHooks: true, mergeFeaturesById: true, skipEmptyJSONFiles: true, jsonReportDirectory: 'target', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
