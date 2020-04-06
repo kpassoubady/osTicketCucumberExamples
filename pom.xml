@@ -51,6 +51,7 @@
                                 </argLine>
                                 <systemPropertyVariables>
                                     <browserType>${browserType}</browserType>
+                                    <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                                 </systemPropertyVariables>
                             </configuration>
                             <dependencies>
