@@ -8,7 +8,6 @@ node('win') {
         properties([
                 buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '3')),
                 [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false],
-                [$class: 'JobRestrictionProperty'],
                 parameters([
                         [$class: 'ExtensibleChoiceParameterDefinition', choiceListProvider: [$class: 'TextareaChoiceListProvider', addEditedValue: false, choiceListText: '''http://osticket.kavinschool.com/
 https://plusresources.org/osticket/
