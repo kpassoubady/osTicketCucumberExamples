@@ -14,23 +14,22 @@ runType=local
 #isCapabilityEnabled=true
 
 #Mac Google Chrome Setup
-gc_browser_path=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome
-gc_driver_path=/Users/kangeyan.passoubady/tools/web_drivers/chromedriver
+#gc_browser_path=/Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+#gc_driver_path=/Users/kangeyan.passoubady/tools/web_drivers/chromedriver
 
 #MAC Firefox Setup
-ff_browser_path=/Applications/Firefox.app/Contents/MacOS/firefox
-ff_driver_path=/Users/kangeyan.passoubady/tools/web_drivers/geckodriver
+#ff_browser_path=/Applications/Firefox.app/Contents/MacOS/firefox
+#ff_driver_path=/Users/kangeyan.passoubady/tools/web_drivers/geckodriver
 
 #Firefox Setup
 #ff_browser_path=C:/Program Files (x86)/Mozilla Firefox/firefox.exe
 ff_browser_path=C:/Program Files/Mozilla Firefox/firefox.exe
-
 ff_driver_path=C:/tools/web_drivers/geckodriver.exe
 
 #Google Chrome Setup
 #gc_browser_path=C:/Program Files (x86)/Google/Chrome/Application/chrome.exe
 gc_browser_path=C:/Program Files/Google/Chrome/Application/chrome.exe
-#gc_driver_path=C:/tools/web_drivers/chromedriver.exe
+gc_driver_path=C:/tools/web_drivers/chromedriver.exe
 
 #IE Setup
 ie_browser_path=C:/Program Files (x86)/Internet Explorer/iexplore.exe
@@ -40,4 +39,4 @@ ie_driver_path=C:/tools/web_drivers/IEDriverServer.exe
 #Edge Setup
 #edge_browser_path=C:/Program Files (x86)/Internet Explorer/iexplore.exe
 edge_browser_path=C:/Program Files/Internet Explorer/iexplore.exe
-edge_driver_path=C:/tools/IEDriverServer.exe
+edge_driver_path=C:/tools/web_drivers/IEDriverServer.exe
