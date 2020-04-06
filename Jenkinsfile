@@ -43,9 +43,15 @@ https://plusresources.org/osticket/
 
     stage('Publish Test Results') {
         // Publish results
+        parallel junit: {
+            junit '**/target/surefire-reports/TEST-*.xml'
+        }, allure: {
+            allure jdk: '', report: 'target/allure-report', results: [[path: 'target/allure-results']]
+        }
         archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar', fingerprint: true, onlyIfSuccessful: true
-        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/cucumber-reports', reportFiles: 'index.html', reportName: 'Screenshot Simple Report', reportTitles: ''])
+        allure includeProperties: false, jdk: '', report: 'target/allure-report', results: [[path: 'target/allure-results']]
         cucumber expandAllSteps: true, failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileExcludePattern: 'classes/*.json', fileIncludePattern: '**/cucumber.json', hideEmptyHooks: true, mergeFeaturesById: true, skipEmptyJSONFiles: true, jsonReportDirectory: 'target', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+        publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'target/cucumber-reports', reportFiles: 'index.html', reportName: 'Screenshot Simple Report', reportTitles: ''])
     }
 
 }
